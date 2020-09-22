@@ -1,0 +1,436 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<title>BitBlt Tutorial - by, David Peace</title>
+</head>
+
+<body background="neobkgnd.jpg" bgcolor="#000000" text="#FFFFFF" link="#CCFF66" vlink="#00FFFF" alink="#FFCC33"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+<p align="center"><a name="Top"><img src="banner.gif" width="600" height="60" border="0" alt="BitBlt">
+</a>
+</p>
+<p align="left"><font color="#00FF00" size="4">Table of Contents</font>
+</p>
+<!--mstheme--></font><!--msthemelist--><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#Intro">Introduction</a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#About">About BitBlt</a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#Start">Getting
+    Started</a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#dwRop">dwRop
+    Constants</a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#Sprites">Sprites
+    and Masks</a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#Code">Lets Code</a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+  <!--msthemelist--><tr><td valign="baseline" width="42"><img src="neoabul1.gif" width="15" height="15" hspace="13"></td><td valign="top" width="100%"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+    <p align="left"><font color="#00FF00" size="4"><a href="#Conclude">Conclusion</a><a href="#Code"><br>
+    </a></font><!--mstheme--></font><!--msthemelist--></td></tr>
+<!--msthemelist--></table><!--mstheme--><font face="Verdana, Arial, Helvetica">
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font size="4" color="#FFFF00"><a name="Intro">I</a>ntroduction to the Tutorial</font></p>
+<p><font color="#00FF00"><b>&nbsp;&nbsp;&nbsp; FINALLY!!&nbsp; You've all been
+waiting for it, hell I wish I had this when I was struggling.&nbsp; When I was a
+beginner in Visual Basic, all I wished for was an in depth tutorial on certain
+aspects of VB.&nbsp;&nbsp; Well, now that I believe I am advanced in Visual
+Basic, I've chosen to share my knowledge by distributing in-depth
+tutorials.&nbsp; This is my first tutorial on the art of the &quot;Non
+flickering BitBlt Function&quot;</b></font></p>
+<p align="left"><font color="#00FF00"><b><a href="#Top">back to top</a></b></font></p>
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font size="4" color="#FFFF00"><a name="About">A</a>bout BitBlt</font></p>
+<p align="left"><font color="#00FF00"><b>&nbsp;&nbsp;&nbsp; I'm sure you've all
+heard the rumors about BitBlt.&nbsp; How you can achieve a more professional
+looking program by removing annoying image flickering when you move an
+picture.&nbsp; Well although this is true, it sometimes can be a most tedious job if you're
+going to have multiple layers of pictures.&nbsp; I am going to take you through
+all the steps necessary in order to create a stable BitBlt program.</b></font></p>
+<p align="left"><font color="#00FF00"><b><a href="#Top">back to top</a></b></font></p>
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font color="#FFFF00" size="4"><a name="Start">G</a>etting Started</font></p>
+<p align="center"><font color="#FFFF00" size="2">NOTE: Please read <a href="functions.html">APIs
+and Functions</a>, if you do not know how to call Functions<br>
+Please be aware that this API function uses a Scale Mode of <u>Pixel</u> <u>NOT</u>
+Twip.<br>
+All white text is code to copy directly into your project.</font></p>
+<p align="left"><b><font color="#00FF00">Before we begin, please start a new
+project in Visual Basic (Standard EXE) and add a module to the project.</font></b></p>
+<p align="left"><b><font color="#00FF00">Here is the Declaration statement for
+BitBlt, this gets placed in the Module:</font></b></p>
+<p align="left"><font size="2">Option Explicit<br>
+Declare Function BitBlt Lib "gdi32" ( _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal hDestDC As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal X As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal Y As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal nWidth As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal nHeight As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal hSrcDC As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal xSrc As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal ySrc As Long, _<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ByVal dwRop As Long) As Long</font></p>
+<p align="left">&nbsp;&nbsp;&nbsp;<b><font color="#00FF00"> As you can see, this
+function returns a &quot;Long&quot; variable.&nbsp; If it returns a 1 the
+function was successful, if it returns a 0 then the function failed.&nbsp; Let's
+take a moment to define each Parameter.</font></b></p>
+<!--mstheme--></font><table border="1" width="100%" height="5" bordercolordark="#999966" bordercolorlight="#FFFF99">
+  <tr>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+      <h2><!--mstheme--><font color="#FFFF99"><font color="#00FFFF" size="3">Variable Name</font><!--mstheme--></font></h2>
+    <!--mstheme--></font></td>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+      <h2><!--mstheme--><font color="#FFFF99"><font color="#00FFFF" size="3">Variable Type</font><!--mstheme--></font></h2>
+    <!--mstheme--></font></td>
+    <td width="39%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica">
+      <h2><!--mstheme--><font color="#FFFF99"><font color="#00FFFF" size="3">Definition</font><!--mstheme--></font></h2>
+    <!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">hDestDC</font><!--mstheme--></font></td>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter tells the
+      function where the picture information is going to be placed - (The handle
+      of the destination) ex. Picture2.hdc</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">x</font><!--mstheme--></font></td>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter should be
+      called xDest because it tells the x coordinates of the upper-left hand
+      corner where the picture information is going to be placed in the
+      destination. ex. 45</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">y</font><!--mstheme--></font></td>
+    <td width="12%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="1"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Like x, this should be
+      called yDest.&nbsp; This is the y coordinate of the upper-left hand corner
+      where the picture information is going to be placed in the destination.
+      ex. 18</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">nWidth</font><!--mstheme--></font></td>
+    <td width="12%" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter is the
+      actual width of the image block you want to take from the source
+      picture.&nbsp; ex. 92</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="13"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">nHeight</font><!--mstheme--></font></td>
+    <td width="12%" height="13"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="13"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter is the
+      actual height of the image block you want to take from the source picture.
+      ex. 143</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="16"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">hSrcDC</font><!--mstheme--></font></td>
+    <td width="12%" height="16"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="16"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter tells the
+      function where the picture information is being taken from - (The handle
+      of the source picture) ex. Picture1.hdc</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="9"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">xSrc</font><!--mstheme--></font></td>
+    <td width="12%" height="9"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="9"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter is the x
+      coordinate of the upper-left hand corner where the picture information is
+      being taken from in the source.&nbsp; ex. 34</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="32"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">ySrc</font><!--mstheme--></font></td>
+    <td width="12%" height="32"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="32"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This parameter is the y
+      coordinate of the upper-left hand corner where the picture information is
+      being taken from in the source.&nbsp; ex. 42</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="12%" height="34"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">dwRop</font><!--mstheme--></font></td>
+    <td width="12%" height="34"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Long</font><!--mstheme--></font></td>
+    <td width="39%" height="34"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This is the most confusing
+      part of the function.&nbsp; It tells the function how the picture is going
+      to be displayed, and there are several different ways to copy it...see the
+      constant calls below.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Verdana, Arial, Helvetica">
+<p align="left"><font color="#00FF00"><b><a href="#Top">back to top</a></b></font></p>
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font size="4" color="#FFFF00"><a name="dwRop">d</a>wRop Constants</font></p>
+<p align="center"><font color="#00FF00"><b>Here are the main constants that can
+be used for dwRop, put these constants in the same module as the BitBlt
+declaration.</b></font></p>
+<p align="left"><font size="2">Public Const SRCCOPY = &amp;HCC0020<br>
+Public Const SRCAND = &amp;H8800C6<br>
+Public Const SRCINVERT = &amp;H660046<br>
+Public Const SRCPAINT = &amp;HEE0086<br>
+Public Const SRCERASE = &amp;H4400328<br>
+Public Const WHITENESS = &amp;HFF0062<br>
+Public Const BLACKNESS = &amp;H42&nbsp;</font></p>
+<p align="center"><b><font color="#00FF00">&nbsp; There are other constants that
+may be used for this function, but these are the only ones that you
+will need.&nbsp; Here's an explantion of each constant.</font></b></p>
+<!--mstheme--></font><table border="1" width="100%" bordercolordark="#999966" bordercolorlight="#FFFF99">
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Constant Name</font></b><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Description</font></b><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">SRCCOPY</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">This copies the picture identically
+      from it's source to its destination.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">SRCAND</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Combines the source picture with the
+      destination picture using the method AND.&nbsp; (Used with a black and
+      white mask to cut a hole in the background)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">SRCINVERT</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Combines the source picture with the
+      destination picture using the method XOR.&nbsp; (Used to paint a sprite on
+      the masked background)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">SRCPAINT</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Combines the source picture with the
+      destination picture using the method OR. (Not often used)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">SRCERASE</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Inverts the destination picture and then combines the
+      results with the source picture using the method AND. (Not often used)</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">WHITENESS</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Turns all output white.</font><!--mstheme--></font></td>
+  </tr>
+  <tr>
+    <td width="19%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">BLACKNESS</font><!--mstheme--></font></td>
+    <td width="81%"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Turns all output black.</font><!--mstheme--></font></td>
+  </tr>
+</table><!--mstheme--><font face="Verdana, Arial, Helvetica">
+<p align="left"><font color="#00FF00"><b><a href="#Top">back to top</a></b></font></p>
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font color="#FFFF00" size="4"><a name="Sprites">S</a>prites and Masks</font></p>
+<p align="left">&nbsp;&nbsp; <font color="#00FF00"><b> Masks and Sprites are the
+two components that make BitBlt successful.&nbsp; I will try my best to explain
+what each one does.&nbsp; We will now begin our&nbsp; project of making a Wolf
+Man walk around a green pasture.&nbsp;</b></font><font color="#00FF00"><b> First
+we have to take our original picture, WolfMan.bmp:</b></font></p>
+<p align="center"><font color="#00FF00"><b>&nbsp;</b></font><img border="0" src="charwolfman.gif" width="64" height="128"></p>
+<p align="left"><font color="#00FF00"><b>and make a mask and a sprite out of
+it.&nbsp; So run the program Ma<font size="3">skMagic, and import this picture
+into it.&nbsp; Select the blue as the transparent\background color, and select
+your destination directory, make sure &quot;Make Both&quot; is selected, and
+then begin.&nbsp; This is what the screen should look like:</font></b></font></p>
+<p align="center"><font color="#00FF00" size="3"><img border="0" src="MaskMagic.gif" width="580" height="483"></font></p>
+<p align="left"><font color="#00FF00" size="3"><b>Now that we have our Mask and
+Sprite made, go to your destination directory and ensure they were copied
+correctly.&nbsp; A log file should be with them also.</b></font></p>
+<p align="left"><font color="#00FF00"><b><u>Mask:</u></b></font></p>
+<p align="left">&nbsp;&nbsp;&nbsp;<font color="#00FF00"><b> A mask is a black
+and white picture of the image you want to Blt.&nbsp; Any color information is
+turned to black, and the background gets turned to white.&nbsp; Here's the mask
+from the above image:</b></font></p>
+<p align="center"><img border="0" src="charwolfman_Mask.gif" width="64" height="128"></p>
+<p align="left"><b><font color="#00FF00">As you can see, we told the program to
+take out the blue background, so it made all the blue, white, and made anything
+else black.&nbsp; This is a valid Mask.&nbsp; Here's what it would look like if
+we Blt it to the green pasture back ground using the dwRop, SRCAND, which is
+what we use for masks.</font></b></p>
+<p align="left"><font color="#FFFFFF" size="2">BitBlt PicGrass.hdc, 0, 0,
+PicMask.Width, PicMask.Height, PicMask.hdc, 0, 0, SRCAND&nbsp;</font></p>
+<p align="center"><img border="0" src="MaskBlt.jpg" width="77" height="134"></p>
+<p align="left"><b><font color="#00FF00">As you can see, white turns
+transparent, and black is completely solid.&nbsp; This makes a perfect
+cutout.&nbsp; Do not put the above coding in your project, that was only to
+demonstrate the BitBlt call.&nbsp; That is how a mask works.</font></b></p>
+<p align="left"><b><font color="#00FF00"><u>Sprite:</u></font></b></p>
+<p align="left">&nbsp;&nbsp;&nbsp;<b><font color="#00FF00"> Sprites, unlike
+masks, have color information.&nbsp; Although it <u>needs</u> a black background
+in order to be displayed properly.&nbsp; Like I said before, white turns
+transparent.&nbsp; But since we use the dwRop SRCINVERT instead of SRCAND, it
+will invert the black to white and delete it.&nbsp; Now we put the SRCAND and
+SRCINVERT together, and we get:</font></b></p>
+<p align="left"><font color="#FFFFFF" size="2">BitBlt PicGrass.hdc, 0, 0,
+PicMask.Width, PicMask.Height, PicMask.hdc, 0, 0, SRCAND&nbsp;<br>
+BitBlt PicGrass.hdc, 0, 0, PicSprite.Width, PicSprite.Height, PicSprite.hdc, 0,
+0, SRCINVERT</font></p>
+<p align="center"><font color="#FFFFFF" size="2"><img border="0" src="SpriteBlt.jpg" width="77" height="134">&nbsp;</font></p>
+<p align="center"><b><font size="3" color="#00FF00">A perfect BitBlt job.&nbsp;
+Always do both SRCAND and SRCINVERT when working with this kind of job.</font></b></p>
+<p align="left"><font color="#00FF00"><b><a href="#Top">back to top</a></b></font></p>
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font color="#FFFF00" size="4"><a name="Code">L</a>et's Code</font></p>
+<p align="left"><font color="#66FFCC">&nbsp; </font><font color="#00FF00"> <b>
+Now that we have the API written, and an understanding of Sprites and Masks, we
+can begin to make the actual code.&nbsp; Put the properties and objects on
+Form1. </b></font></p>
+<div align="left">
+  <!--mstheme--></font><table border="1" width="844" height="19" bordercolordark="#999966" bordercolorlight="#FFFF99">
+    <tr>
+      <td width="94" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Name</font></b><!--mstheme--></font></td>
+      <td width="96" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">ScaleMode</font></b><!--mstheme--></font></td>
+      <td width="125" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">AutoRedraw</font></b><!--mstheme--></font></td>
+      <td width="130" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Caption</font></b><!--mstheme--></font></td>
+      <td width="101" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Picture</font></b><!--mstheme--></font></td>
+      <td width="71" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Visible</font></b><!--mstheme--></font></td>
+      <td width="181" height="11"><!--mstheme--><font face="Verdana, Arial, Helvetica"><b><font color="#00FFFF">Object Type</font></b><!--mstheme--></font></td>
+    </tr>
+    <tr>
+      <td width="94" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Form1</font><!--mstheme--></font></td>
+      <td width="96" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">3 - Pixel</font><!--mstheme--></font></td>
+      <td width="125" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">True</font><!--mstheme--></font></td>
+      <td width="130" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">BitBlt Example</font><!--mstheme--></font></td>
+      <td width="101" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Grass.jpg</font><!--mstheme--></font></td>
+      <td width="71" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">True</font><!--mstheme--></font></td>
+      <td width="181" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Form</font><!--mstheme--></font></td>
+    </tr>
+    <tr>
+      <td width="94" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">picMask</font><!--mstheme--></font></td>
+      <td width="96" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">3 - Pixel</font><!--mstheme--></font></td>
+      <td width="125" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">True</font><!--mstheme--></font></td>
+      <td width="130" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">-</font><!--mstheme--></font></td>
+      <td width="101" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Mask.bmp</font><!--mstheme--></font></td>
+      <td width="71" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">False</font><!--mstheme--></font></td>
+      <td width="181" height="7"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Picture Box</font><!--mstheme--></font></td>
+    </tr>
+    <tr>
+      <td width="94" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">picSprite</font><!--mstheme--></font></td>
+      <td width="96" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">3 - Pixel</font><!--mstheme--></font></td>
+      <td width="125" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">True</font><!--mstheme--></font></td>
+      <td width="130" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">-</font><!--mstheme--></font></td>
+      <td width="101" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Sprite.bmp</font><!--mstheme--></font></td>
+      <td width="71" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">False</font><!--mstheme--></font></td>
+      <td width="181" height="5"><!--mstheme--><font face="Verdana, Arial, Helvetica"><font color="#66FFCC">Picture Box</font><!--mstheme--></font></td>
+    </tr>
+  </table><!--mstheme--><font face="Verdana, Arial, Helvetica">
+</div>
+<p><font color="#00FF00"><b>Here is the code you can copy into the Form1 code:</b></font></p>
+<p><font size="2">Option Explicit<br>
+Dim Frame as Integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <font color="#00FF00">'Tells
+if the frame is 1 or 2 in the current direction</font><br>
+Dim XPos as Integer, YPos as Integer&nbsp;&nbsp;&nbsp; <font color="#00FF00">'Position
+holders for the position of the Wolf Man on the Form</font><br>
+Dim LeftX as Integer, TopY as Integer&nbsp;&nbsp; <font color="#00FF00">'Tells
+where the frame of the animation is<br>
+</font><font color="#FFFFFF">Const Speed = 12&nbsp;&nbsp; <font color="#00FF00">'Change this number to how fast you want him to move
+<br><br>
+</font><font color="#FFFFFF">Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)<br>
+If KeyCode = vbKeyLeft Then&nbsp;&nbsp;&nbsp; </font><font color="#00FF00">'The
+user pressed the Left arrow key</font><font color="#FFFFFF"><br>
+&nbsp;&nbsp;&nbsp; If Frame = 0 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 96<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XPos = XPos - Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; ElseIf Frame = 1 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 96<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XPos = XPos - Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; End If<br>
+ElseIf KeyCode = vbKeyRight Then&nbsp;&nbsp;&nbsp; </font><font color="#00FF00">'The
+user pressed the Right arrow key</font><font color="#FFFFFF"><br>
+&nbsp;&nbsp;&nbsp; If Frame = 1 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XPos = XPos + Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; ElseIf Frame = 0 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XPos = XPos + Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; End If<br>
+ElseIf KeyCode = vbKeyUp Then&nbsp;&nbsp;&nbsp; </font><font color="#00FF00">'The
+user pressed the Up arrow key</font><font color="#FFFFFF"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If Frame = 1 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; YPos = YPos - Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; ElseIf Frame = 0 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; YPos = YPos - Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; End If<br>
+ElseIf KeyCode = vbKeyDown Then&nbsp;&nbsp;&nbsp; </font><font color="#00FF00">'The
+user pressed the Down arrow key</font><font color="#FFFFFF"><br>
+&nbsp;&nbsp;&nbsp; If Frame = 0 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 64<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; YPos = YPos + Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; ElseIf Frame = 1 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Frame = 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LeftX = 32<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TopY = 64<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; YPos = YPos + Speed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MoveIt<br>
+&nbsp;&nbsp;&nbsp; End If<br>
+End If<br>
+End Sub</font><font color="#00FF00"><br>
+<br>
+</font><font color="#FFFFFF">Private Sub Form_Load()<br>
+XPos = Form1.ScaleWidth / 2&nbsp;&nbsp;&nbsp; </font><font color="#00FF00">'Startup
+position on the form, is Center X</font><font color="#FFFFFF"><br>
+YPos = Form1.ScaleHeight / 2&nbsp;&nbsp; </font><font color="#00FF00">'Startup
+position on the form, is Center Y</font><font color="#FFFFFF"><br>
+LeftX = 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#00FF00">'TopLeft X Coord of the Wolf Man Frame 1</font><font color="#FFFFFF"><br>
+TopY = 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#00FF00">'TopLeft Y Coord of the Wolf Man Frame 1</font><font color="#FFFFFF"><br>
+MoveIt<br>
+End Sub</font><font color="#00FF00"><br>
+<br>
+'This sub updates and moves the Wolf Man<br>
+</font></font><font color="#FFFFFF" size="2">Sub MoveIt()<br>
+</font><font size="2" color="#00FF00">'Cls clears all the stray pixels from the
+form object.</font><font color="#FFFFFF" size="2"><br>
+Form1.Cls<br>
+</font><font size="2" color="#00FF00">'32 here is the length and width of each
+Wolf Man frame.&nbsp; He is 32 x 32</font><font color="#FFFFFF" size="2"><br>
+Call BitBlt(Form1.hDC, XPos, YPos, 32, 32, picMask.hDC, LeftX, TopY, SRCAND)<br>
+Call BitBlt(Form1.hDC, XPos, YPos, 32, 32, picSprite.hDC, LeftX, TopY,
+SRCINVERT)<br>
+</font><font size="2" color="#00FF00">'Refresh must be always be written to tell
+the program you want to see all the picture information</font><font color="#FFFFFF" size="2"><br>
+Form1.Refresh<br>
+End Sub</font></p>
+<p>&nbsp;&nbsp; <b><font color="#FFFFFF" size="3"> </font><font size="3" color="#00FF00">It's
+ok if you don't understand this coding completely.&nbsp; This was just an
+example of how BitBlt can work.&nbsp; The basic principles are all in the MoveIt
+Sub.&nbsp; Always Cls the destination before you run the function, and always Refresh the destination after the
+function.</font></b></p>
+<p align="left"><font color="#00FF00"><b><a href="#Top">back to top</a></b></font></p>
+<!--msthemeseparator--><p align="center"><img src="neoarule.gif" width="600" height="10"></p>
+<p align="center"><font color="#00FF00" size="4"><a name="Conclude">C</a>onclusion</font></p>
+<p align="left"><b><font size="3" color="#00FF00">&nbsp;&nbsp;&nbsp; Well, I
+hope this has all been helpful to you, I just wanted to pass on the
+knowledge.&nbsp; If this was helpful, please let me know by e-mailing me at <a href="mailto:brand-m@juno.com">brand-m@juno.com</a>.&nbsp;
+I am going to create more in-depth tutorials soon, so keep an eye out.&nbsp; </font></b><b><font size="3" color="#00FF00">That
+is about it, Happy Blting.</font></b><b><font size="3" color="#00FF00"><br>
+&nbsp;&nbsp;&nbsp; This page is under the personal Copyright of David Peace, do
+not copy or change or distribute without my expressed consent.</font></b></p>
+<p align="left">&nbsp;</p>
+<!--mstheme--></font></body>
+
+</html>
+
+
+
+
